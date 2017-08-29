@@ -12,15 +12,18 @@ $(".col-10").append('<image src="' + pics[0] +'">');
 for (i = 0; i < cats.length; i++) {
   var cat = cats[i];
   var pic = pics[i];
-  var elem = $(".list").append('<li>' + cat + '</li>');
-
+  //var elem = $(".list").append('<li>' + cat + '</li>');
+  var x = document.createElement("LI");
+  var t = document.createTextNode(cat);
+  x.appendChild(t);
+  document.getElementById("myList").appendChild(x);
 
   //elem.on('click',(function(j){
-  elem.addEventListener('click', (function(picCopy) {
+  x.addEventListener('click', (function(picCopy) {
      return function() {
        var src = $(this).attr('src');
        $('.col-10 img').attr('src', picCopy);
        console.log(picCopy);
      };
-  })(i));
+  })(pic));
 };
