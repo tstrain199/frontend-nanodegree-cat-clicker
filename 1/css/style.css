@@ -1,0 +1,22 @@
+body {background-color: #CCC;}
+
+.bgimg {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    z-index:-1;
+    opacity:1;
+}
+
+h2 {
+    color:red;
+    text-shadow: 1px 1px 3px rgba(255,255,255, .5);
+    text-align: center;
+}
+
+h1 {
+    color:green;
+    text-shadow: 1px 1px 3px rgba(255,255,255, .5);
+    text-align: center;
+}
