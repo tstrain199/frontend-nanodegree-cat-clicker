@@ -83,8 +83,9 @@
     render: function(num){
       var d = octopus.getCatz();
       var src = d[num].pic;
-      $('.col-10 img').attr('src', d[num].pic);
+      $('.name').text(d[num].name);
       $('.counter').text(d[num].count);
+      $('.col-10 img').attr('src', d[num].pic);
     }
   };
   octopus.init();
