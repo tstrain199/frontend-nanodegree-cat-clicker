@@ -50,7 +50,22 @@
 
     addCount: function(num) {
       model.addCount(num);
+    },
+
+    displayAdmin: function() {
+      model.displayAdmin = true;
+      view.renderAdmin();
+    },
+
+    hideAdmin: function() {
+      model.displayAdmin = false;
+      view.renderAdmin();
+    },
+
+    getAdmin: function() {
+      return model.displayAdmin;
     }
+
   };
 
   var view = {
@@ -75,9 +90,12 @@
       };
 
       // set listener for admin button
-      var w = document.getElementById("adminButton");
-      w.addEventListener('click', octopus.displayAdmin);
-    },
+  var w = document.getElementById("adminButton");
+    w.addEventListener('click', octopus.displayAdmin);
+      // set lintener for cancel button
+  var v = document.getElementById("cancelButton");
+    v.addEventListener('click', octopus.hideAdmin);
+  },
 
     render: function(num){
       var d = octopus.getCatz();
@@ -87,10 +105,14 @@
       $('.col-10 img').attr('src', d[num].pic);
     },
 
-    hideAdmin: function(){
-      $('.forms').hide();
+    renderAdmin: function() {
+      if (octopus.getAdmin()){
+        $('.forms').css('display', 'inherit');
+      } else {
+        $('.forms').css('display', 'none');
+      }
     }
-
   };
+
   octopus.init();
   //view.hideAdmin();
