@@ -29,6 +29,7 @@
       ],
 
       "displayAdmin" : false,
+      "it" : 0,
 
       returnAllCatz: function(){
         return(model.catz);
@@ -64,6 +65,21 @@
 
     getAdmin: function() {
       return model.displayAdmin;
+    },
+
+    setIt: function(num) {
+      model.it = num;
+    },
+
+    getIt: function() {
+      return model.it;
+    },
+
+    updateCatz: function(a,b,c) {
+      model.catz[model.it].name = a;
+      model.catz[model.it].pic = b;
+      model.catz[model.it].count = c;
+      view.render(model.it);
     }
 
   };
@@ -85,19 +101,31 @@
           return function(){
             octopus.addCount(nameCopy);
             view.render(nameCopy);
+            octopus.setIt(nameCopy);
           };
         })(names));
+        view.render(model.it);
       };
 
       // set listener for admin button
   var w = document.getElementById("adminButton");
-    w.addEventListener('click', octopus.displayAdmin);
+  w.addEventListener('click', octopus.displayAdmin);
       // set lintener for cancel button
   var v = document.getElementById("cancelButton");
-    v.addEventListener('click', octopus.hideAdmin);
+  v.addEventListener('click', octopus.hideAdmin);
+
+  var v = document.getElementById("saveButton");
+  v.addEventListener('click', (function(){
+    return function(){
+        var a = document.getElementById("nameForm").value;
+        var b = document.getElementById("urlForm").value;
+        var c = document.getElementById("clicksForm").value;
+        octopus.updateCatz(a,b,c);
+      };
+    })());
   },
 
-    render: function(num){
+  render: function(num){
       var d = octopus.getCatz();
       var src = d[num].pic;
       $('.name').text(d[num].name);
@@ -105,14 +133,20 @@
       $('.col-10 img').attr('src', d[num].pic);
     },
 
-    renderAdmin: function() {
+  renderAdmin: function() {
       if (octopus.getAdmin()){
         $('.forms').css('display', 'inherit');
       } else {
         $('.forms').css('display', 'none');
       }
-    }
-  };
+    },
 
-  octopus.init();
-  //view.hideAdmin();
+  getForms: function() {
+    $(".nameForm").submit(function( event ) {
+      alert( "Handler for .submit() called." );
+      event.preventDefault();
+    });
+  }
+};
+
+octopus.init();
